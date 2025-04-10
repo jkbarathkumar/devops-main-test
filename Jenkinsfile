@@ -18,7 +18,11 @@ pipeline {
                 
             }
         }
-
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t barathkumar29/microservice-java:v1 .'
+            }
+        }
         stage('Push to DockerHub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
