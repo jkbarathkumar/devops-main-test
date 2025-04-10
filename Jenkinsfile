@@ -22,9 +22,6 @@ pipeline {
         }
 
         stage('Docker Build & Push') {
-            when {
-                branch 'develop'
-            }
             steps {
                 dir('') {
                     script {
@@ -38,9 +35,6 @@ pipeline {
         }
 
         stage('Kubernetes Deploy') {
-            when {
-                branch 'develop'
-            }
             steps {
                 dir('') {
                     sh """
