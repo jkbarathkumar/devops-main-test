@@ -14,9 +14,8 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                dir('') {
                     sh 'mvn clean install'
-                }
+                
             }
         }
 
@@ -33,12 +32,11 @@ pipeline {
 
         stage('Kubernetes Deploy') {
             steps {
-                dir('') {
                     sh """
                         kubectl apply -f k8s/deployment.yaml
                         kubectl apply -f k8s/service.yaml
                     """
-                }
+                
             }
         }
     }
