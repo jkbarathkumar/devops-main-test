@@ -38,8 +38,8 @@ pipeline {
             steps {
                 dir('') {
                     sh """
-                        sed -i 's|IMAGE_TAG|${IMAGE_TAG}|g' k8s/deployment.yaml
-                        kubectl apply -f k8s/ --validate=false
+                        kubectl apply -f k8s/deployment.yaml
+                        kubectl apply -f k8s/service.yaml
                     """
                 }
             }
