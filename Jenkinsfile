@@ -15,7 +15,7 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                dir('java-microservice') {
+                dir('') {
                     sh 'mvn clean install'
                 }
             }
