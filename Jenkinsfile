@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY = 'barathkumar29/java-microservice'
-        IMAGE_TAG = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
+        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'        
     }
 
     stages {
@@ -21,15 +20,13 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Push') {
+        stage('Push to DockerHub') {
             steps {
-                dir('') {
-                    script {
-                        docker.build("${REGISTRY}:${IMAGE_TAG}")
-                        docker.withRegistry('', 'docker-hub-credentials') {
-                            docker.image("${REGISTRY}:${IMAGE_TAG}").push()
-                        }
-                    }
+                withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                    docker push barathkumar29/microservice-java:v1
+                    '''
                 }
             }
         }
