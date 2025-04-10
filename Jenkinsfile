@@ -26,7 +26,7 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                dir('java-microservice') {
+                dir('') {
                     script {
                         docker.build("${REGISTRY}:${IMAGE_TAG}")
                         docker.withRegistry('', 'docker-hub-credentials') {
@@ -42,7 +42,7 @@ pipeline {
                 branch 'develop'
             }
             steps {
-                dir('java-microservice') {
+                dir('') {
                     sh """
                         sed -i 's|IMAGE_TAG|${IMAGE_TAG}|g' k8s/deployment.yaml
                         kubectl apply -f k8s/ --validate=false
