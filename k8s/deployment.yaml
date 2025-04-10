@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: java-app
-          image: barathkumar29/java-microservice
+          image: barathkumar29/microservice-java:v1
           ports:
             - containerPort: 8000
       imagePullSecrets:
