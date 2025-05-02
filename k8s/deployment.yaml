@@ -16,6 +16,6 @@ spec:
         - name: java-app
           image: barathkumar29/microservice-java:v1
           ports:
-            - containerPort: 8000
+            - containerPort: 8080
       imagePullSecrets:
         - name: regcred  
